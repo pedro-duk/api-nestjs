@@ -5,6 +5,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { useContainer } from 'class-validator';
 
 async function bootstrap() {
+  await connectToMongo();
+  
   const app = await NestFactory.create(AppModule);
 
   app.useGlobalPipes(
@@ -17,7 +19,6 @@ async function bootstrap() {
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
-  await connectToMongo();
   await app.listen(3000);
 }
 bootstrap();
