@@ -8,4 +8,10 @@ export class UserRepository {
     const newUser = new User(userData);
     await newUser.save();
   }
+
+  async findByEmail(email: string) {
+    const possibleUser = await User.findOne({ email }).exec();
+    
+    return possibleUser;
+  }
 }

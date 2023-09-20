@@ -1,4 +1,11 @@
-import { IsEmail, IsIn, IsNotEmpty, IsString, MinLength } from "class-validator";
+import {
+  IsEmail,
+  IsIn,
+  IsNotEmpty,
+  IsString,
+  MinLength,
+} from 'class-validator';
+import { UniqueEmail } from '../validation/unique-email.validator';
 
 export class CreateUserDTO {
   @IsString()
@@ -6,6 +13,7 @@ export class CreateUserDTO {
   name: string;
 
   @IsEmail()
+  @UniqueEmail({ message: 'Email is already registered.' })
   email: string;
 
   @IsString()

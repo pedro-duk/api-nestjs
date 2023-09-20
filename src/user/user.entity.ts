@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 
-interface IUser {
+export interface IUser {
   name: string;
   email: string;
   password: string;
   role: string;
 }
 
-const userSchema = new mongoose.Schema<IUser>(
+export const userSchema = new mongoose.Schema<IUser>(
   {
     name: { type: String, required: true },
     email: { type: String, required: true },
