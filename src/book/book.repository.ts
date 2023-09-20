@@ -8,4 +8,8 @@ export class BookRepository {
     const newBook = new Book(bookData);
     await newBook.save();
   }
+
+  async findById(bookId: string) {
+    return await Book.findById(bookId);
+  }
 }

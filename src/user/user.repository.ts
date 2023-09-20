@@ -10,8 +10,10 @@ export class UserRepository {
   }
 
   async findByEmail(email: string) {
-    const possibleUser = await User.findOne({ email }).exec();
-    
-    return possibleUser;
+    return await User.findOne({ email }).exec();
+  }
+
+  async findById(userId: string) {
+    return await User.findById(userId).exec();
   }
 }
