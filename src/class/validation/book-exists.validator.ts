@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import {
+  ValidationArguments,
   ValidationOptions,
   ValidatorConstraint,
   ValidatorConstraintInterface,
@@ -17,9 +18,13 @@ export class BookExistsValidator implements ValidatorConstraintInterface {
 
     return !!book;
   }
+
+  defaultMessage(args: ValidationArguments) {
+    return `${args.value} is not an existing Book Id`;
+  }
 }
 
-export const BookExists = (validationOptions: ValidationOptions) => {
+export const BookExists = (validationOptions?: ValidationOptions) => {
   return(object: Object, property: string) => {
     registerDecorator({
       target: object.constructor,

@@ -13,7 +13,7 @@ export class CreateUserDTO {
   name: string;
 
   @IsEmail()
-  @UniqueEmail({ message: 'Email is already registered.' })
+  @UniqueEmail()
   email: string;
 
   @IsString()

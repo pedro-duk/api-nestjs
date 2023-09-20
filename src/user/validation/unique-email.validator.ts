@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import {
+  ValidationArguments,
   ValidationOptions,
   ValidatorConstraint,
   ValidatorConstraintInterface,
@@ -17,9 +18,13 @@ export class UniqueEmailValidator implements ValidatorConstraintInterface {
 
     return !user;
   }
+
+  defaultMessage(args: ValidationArguments) {
+    return `The email ${args.property} is already vinculated to an account`;
+  }
 }
 
-export const UniqueEmail = (validationOptions: ValidationOptions) => {
+export const UniqueEmail = (validationOptions?: ValidationOptions) => {
   return (object: Object, property: string) => {
     registerDecorator({
       target: object.constructor,
