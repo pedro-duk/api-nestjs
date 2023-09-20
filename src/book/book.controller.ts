@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { BookRepository } from './book.repository';
 import { CreateBookDTO } from './dto/CreateBook.dto';
 import { UpdateBookDTO } from './dto/UpdateBook.dto';
@@ -19,7 +27,7 @@ export class BookController {
 
   @Get()
   async getAllBooks() {
-    const books = this.bookRepository.findAll();
+    const books = await this.bookRepository.findAll();
 
     return {
       books,
@@ -29,7 +37,7 @@ export class BookController {
 
   @Get('/:id')
   async getBookById(@Param('id') id: string) {
-    const book = this.bookRepository.findById(id);
+    const book = await this.bookRepository.findById(id);
 
     return {
       book,
@@ -47,6 +55,16 @@ export class BookController {
     return {
       updatedBook: book,
       message: 'Book has been updated',
+    };
+  }
+
+  @Delete('/:id')
+  async deleteBook(@Param('id') id: string) {
+    const book = await this.bookRepository.delete(id);
+
+    return {
+      deletedBook: book,
+      message: 'Book has been deleted',
     };
   }
 }

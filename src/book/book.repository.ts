@@ -19,6 +19,10 @@ export class BookRepository {
     });
   }
 
+  async delete(bookId: string) {
+    return await Book.findByIdAndDelete(bookId);
+  }
+
   async findAll() {
     return await Book.find({});
   }
